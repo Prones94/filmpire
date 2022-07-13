@@ -10,7 +10,8 @@ export default makeStyles((theme) => ({
       flexWrap: 'wrap',
     },
   },
-  link: {
+  links: {
+    textDecoration: 'none',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
