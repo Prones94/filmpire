@@ -8,7 +8,7 @@ const Movie = ({ movie, i }) => {
   const classes = useStyles();
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.movie}>
-      <Link className={classes.link} to={`/movies/${movie.id}`}>
+      <Link className={classes.link} to={`/movie/${movie.id}`}>
         <img
           alt={movie.title}
           className={classes.image}

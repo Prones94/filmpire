@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 // eslint-disable-next-line import/no-named-as-default
 import useStyles from './styles';
 
-import { NavBar, Movies } from './index';
+import { NavBar, Movies, Profile, MovieInformation, Actors } from './index';
 
 function App() {
   const classes = useStyles();
@@ -17,16 +17,16 @@ function App() {
         <div className={classes.toolbar} />
         <Switch>
           <Route exact path="/movie/:id">
-            <Movies />
+            <MovieInformation />
           </Route>
           <Route exact path="/actors/:id">
-            Actors
+            <Actors />
           </Route>
           <Route exact path="/">
             <Movies />
           </Route>
           <Route exact path="/profile/:id">
-            Movies
+            <Profile />
           </Route>
         </Switch>
       </main>

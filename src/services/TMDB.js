@@ -21,19 +21,22 @@ export const tmdbApi = createApi({
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'string') {
           return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
         }
-        console.log(genreIdOrCategoryName);
         // * Get Movies by Genre
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
-          console.log('HERE');
           return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${tmdbApiKey}`;
         }
         // * Get Popular Movies
         return `/movie/popular?page=${page}&api_key=${tmdbApiKey}`;
       },
     }),
+    //* Get Movie
+    getMovie: builder.query({
+      query: (id) => `/movie/${id}?api_key=${tmdbApiKey}&append_to_response=videos,images,credits,alternative_titles, keywords`,
+    }),
   }),
 });
 
 export const {
   useGetGenresQuery,
-  useGetMoviesQuery } = tmdbApi;
+  useGetMoviesQuery,
+  useGetMovieQuery } = tmdbApi;
