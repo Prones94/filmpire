@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, CircularProgress, Typography, Grid, Button } from '@mui/material';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { ArrowBack, Movie as MovieIcon } from '@mui/icons-material';
 import { useGetActorDetailsQuery, useGetMoviesByActorIdQuery } from '../../services/TMDB';
-import { MovieList } from '../index';
+import { MovieList, Pagination } from '../index';
 
 import useStyles from './styles';
 
@@ -13,12 +13,12 @@ import useStyles from './styles';
 // use new created useGetActor hook to get actor's info into the component
 // display user name, birthday,bio, imdb button, back button, other movies actor is in
 const Actors = () => {
-  const page = 1;
   const { id } = useParams();
   const { data, isFetching, error } = useGetActorDetailsQuery(id);
   const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
   const classes = useStyles();
   const history = useHistory();
+  const [page, setPage] = useState(1);
 
   if (isFetching) {
     return (
@@ -59,6 +59,7 @@ const Actors = () => {
       <Box margin="2rem 0">
         <Typography variant="h3" gutterBottom align="center">Movies</Typography>
         {movies && <MovieList movies={movies} numberOfMovies={12} />}
+        <Pagination currentPage={page} setPage={setPage} totalPages={movies?.total_pages} />
       </Box>
     </>
   );

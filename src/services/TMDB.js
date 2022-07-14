@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const tmdbApiKey = process.env.REACT_APP_TMDB_KEY;
@@ -34,8 +35,17 @@ export const tmdbApi = createApi({
       query: (id) => `/movie/${id}?api_key=${tmdbApiKey}&append_to_response=videos,images,credits,alternative_titles, keywords`,
     }),
     //* Get User Specific Lists
+    getList: builder.query({
+      query: ({ listName, accountId, sessionId, page }) => `/account/${accountId}/${listName}?api_key=${tmdbApiKey}&session_id=${sessionId}&page=${page}`,
+    }),
     getRecommendations: builder.query({
-      query: ({movie_id, list}) => `/movie/${movie_id}/${list}?api_key=${tmdbApiKey}`,
+      query: ({ movie_id, list }) => `/movie/${movie_id}/${list}?api_key=${tmdbApiKey}`,
+    }),
+    getActorDetails: builder.query({
+      query: (person_id) => `/person/${person_id}?api_key=${tmdbApiKey}&language=en-US&append_to_response=images`,
+    }),
+    getMoviesByActorId: builder.query({
+      query: ({ id, page }) => `/discover/movie?with_cast=${id}&page=${page}&api_key=${tmdbApiKey}`,
     }),
   }),
 });
@@ -44,4 +54,7 @@ export const {
   useGetGenresQuery,
   useGetMoviesQuery,
   useGetMovieQuery,
-  useGetRecommendationsQuery } = tmdbApi;
+  useGetRecommendationsQuery,
+  useGetActorDetailsQuery,
+  useGetMoviesByActorIdQuery,
+  useGetListQuery } = tmdbApi;
