@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, CircularProgress, Typography, Grid, Button } from '@mui/material';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { ArrowBack, Movie as MovieIcon } from '@mui/icons-material';
 import { useGetActorDetailsQuery, useGetMoviesByActorIdQuery } from '../../services/TMDB';
 import { MovieList, Pagination } from '../index';
@@ -14,11 +14,11 @@ import useStyles from './styles';
 // display user name, birthday,bio, imdb button, back button, other movies actor is in
 const Actors = () => {
   const { id } = useParams();
+  const [page, setPage] = useState(1);
   const { data, isFetching, error } = useGetActorDetailsQuery(id);
   const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
   const classes = useStyles();
   const history = useHistory();
-  const [page, setPage] = useState(1);
 
   if (isFetching) {
     return (

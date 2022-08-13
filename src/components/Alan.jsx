@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import alanBtn from '@alan-ai/alan-sdk-web';
 import { ColorModeContext } from '../utils/ToggleColorMode';
-import { fetchToken, createSessionId, moviesApi } from '../utils';
+import { fetchToken } from '../utils';
 import { selectGenreOrCategory, searchMovie } from '../features/currentGenreOrCategory';
 
 const useAlan = () => {
